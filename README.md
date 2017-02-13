@@ -6,9 +6,16 @@ PHP 5.3 [reached EOL](http://php.net/eol.php) on 14 Aug 2014 and thus, official 
 
 This repo provides the following images:
 
-* cespi/php:5.3
+* cespi/php:5.3-apline
 * cespi/php:5.3-apache
 * cespi/php:5.3-fpm
 
 All images are build from alpine 3.4 following the same criteria used to build
 current php library docker images
+
+## Images with additional PHP modules commonly used
+
+Selected modules are commonly used by our organization. This images are:
+
+* cespi/php-modules:5.3-alpine
+
