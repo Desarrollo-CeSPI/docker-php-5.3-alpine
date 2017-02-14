@@ -6,6 +6,8 @@ else
 	SUFFIX=
 fi
 
+: ${APACHE_DOCUMENT_ROOT:=/var/www/html}
+export APACHE_DOCUMENT_ROOT
 : ${APACHE_RUN_USER:=apache}
 export APACHE_RUN_USER
 : ${APACHE_RUN_GROUP:=apache}

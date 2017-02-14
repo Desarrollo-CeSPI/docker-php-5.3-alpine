@@ -21,6 +21,7 @@ RUN apk add --no-cache --virtual .persistent-deps \
 		curl \
 		tar \
 		apache2 \
+		gettext \
 		bash \
 		xz
 
@@ -171,6 +172,8 @@ COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 ENTRYPOINT ["docker-php-entrypoint"]
 COPY apache2-foreground /usr/local/bin/
+COPY httpd.conf /usr/local/etc/httpd.conf.tpl
+
 WORKDIR /var/www/html
 
 EXPOSE 80
