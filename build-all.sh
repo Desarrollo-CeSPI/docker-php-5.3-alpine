@@ -2,10 +2,10 @@
 
 set -e 
 
-docker build --rm -t cespi/php:5.3-alpine .
-docker build --rm -t cespi/php:5.3-apache-alpine apache/
-docker build --rm -t cespi/php:5.3-fpm-alpine fpm/
+docker build --rm -t cespi/php-5.3 .
+docker build --rm -t cespi/php-5.3:apache apache/
+docker build --rm -t cespi/php-5.3:fpm fpm/
 
-docker build --rm -t cespi/php-modules:5.3-alpine with-modules -f with-modules/Dockerfile
-docker build --rm -t cespi/php-modules:5.3-apache-alpine with-modules -f with-modules/Dockerfile.apache
-docker build --rm -t cespi/php-modules:5.3-fpm-alpine with-modules -f with-modules/Dockerfile.fpm
+docker build --rm -t cespi/php-5.3:modules with-modules
+docker build --rm -t cespi/php-5.3:modules-apache with-modules/apache
+docker build --rm -t cespi/php-5.3:modules-fpm with-modules/fpm

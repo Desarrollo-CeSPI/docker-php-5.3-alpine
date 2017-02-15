@@ -1,4 +1,4 @@
-FROM cespi/php:5.3-apache-alpine
+FROM cespi/php-5.3:fpm
 
 
 RUN apk add -U --no-cache \

@@ -12,7 +12,7 @@ shift
 
 [ "$PHP_SERVER_PORT" -lt 1024 ] && (echo port must be greater than 1024; exit 1)
 
-PHP_SERVER_DOCKER_IMAGE=${PHP_SERVER_DOCKER_IMAGE:-cespi/php-modules:5.3-apache-alpine}
+PHP_SERVER_DOCKER_IMAGE=${PHP_SERVER_DOCKER_IMAGE:-cespi/php-5.3:modules-apache}
 PHP_SERVER_DOCKER_RUN_OPTIONS=${PHP_SERVER_DOCKER_RUN_OPTIONS:-'--add-host local.docker:172.17.0.1'}
 
 docker run --rm -it -p ${PHP_SERVER_PORT}:80 -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v "`pwd`:`pwd`" -e "APACHE_DOCUMENT_ROOT=`pwd`" -w "`pwd`" $PHP_SERVER_DOCKER_RUN_OPTIONS $PHP_SERVER_DOCKER_IMAGE $@
