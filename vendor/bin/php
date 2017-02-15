@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e 
+
+[ -z "$PHP_CLI_DOCKER_IMAGE" ] && ( echo You must set PHP_CLI_DOCKER_IMAGE environment variable ; exit 1)
+
+PHP_OPTIONS=${PHP_OPTIONS:- -d 'date.timezone=America/Argentina/Buenos_Aires' -d memory_limit=512M}
+PHP_CLI_DOCKER_RUN_OPTIONS=${PHP_CLI_DOCKER_RUN_OPTIONS:-'--add-host local.docker:172.17.0.1'}
+
+docker run --rm -it -u `id -u $USER`:`id -g $USER` -v "`pwd`:`pwd`" -w "`pwd`" $PHP_CLI_DOCKER_RUN_OPTIONS $PHP_CLI_DOCKER_IMAGE $PHP_OPTIONS $@
