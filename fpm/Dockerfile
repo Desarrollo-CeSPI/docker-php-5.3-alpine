@@ -145,8 +145,6 @@ RUN set -ex \
 		echo '; if we send this to /proc/self/fd/1, it never appears'; \
 		echo 'access.log = /proc/self/fd/2'; \
 		echo; \
-		echo 'clear_env = no'; \
-		echo; \
 		echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
 		echo 'catch_workers_output = yes'; \
 	} | tee php-fpm.d/docker.conf \
@@ -155,8 +153,10 @@ RUN set -ex \
 		echo 'daemonize = no'; \
 		echo; \
 		echo '[www]'; \
-		echo 'listen = [::]:9000'; \
-	} | tee php-fpm.d/zz-docker.conf
+		echo 'listen = 9000'; \
+	} | tee php-fpm.d/zz-docker.conf \
+  && sed -i 's/^listen =/;listen =/' /usr/local/etc/php-fpm.d/www.conf \
+  && sed -i 's/^listen =/;listen =/' /usr/local/etc/php-fpm.conf.default
 
 EXPOSE 9000
 CMD ["php-fpm"]
