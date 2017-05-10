@@ -21,17 +21,17 @@ after_success:
   - export REPO=cespi/php-5.3
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build -f Dockerfile -t $REPO:cli-$TAG .
-  - docker build -f apache/Dockerfile -t $REPO:apache-$TAG .
-  - docker build -f fpm/Dockerfile -t $REPO:fpm-$TAG .
+  - docker build -f apache/Dockerfile -t $REPO:apache-$TAG ./apache
+  - docker build -f fpm/Dockerfile -t $REPO:fpm-$TAG ./fpm
   - docker push $REPO:cli-$TAG
   - docker push $REPO:apache-$TAG
   - docker push $REPO:fpm-$TAG
   - envsubst '$TAG' < with-modules/Dockerfile.tpl > with-modules/Dockerfile
-  - docker build -f with-modules/Dockerfile -t $REPO:modules-cli-$TAG .
+  - docker build -f with-modules/Dockerfile -t $REPO:modules-cli-$TAG ./with-modules
   - envsubst '$TAG' < with-modules/apache/Dockerfile.tpl > with-modules/apache/Dockerfile
-  - docker build -f with-modules/apache/Dockerfile -t $REPO:modules-apache-$TAG .
+  - docker build -f with-modules/apache/Dockerfile -t $REPO:modules-apache-$TAG ./with-modules/apache
   - envsubst '$TAG' < with-modules/fpm/Dockerfile.tpl > with-modules/fpm/Dockerfile
-  - docker build -f with-modules/fpm/Dockerfile -t $REPO:modules-fpm-$TAG .
+  - docker build -f with-modules/fpm/Dockerfile -t $REPO:modules-fpm-$TAG ./with-modules/fpm
   - docker push $REPO:modules-cli-$TAG
   - docker push $REPO:modules-apache-$TAG
   - docker push $REPO:modules-fpm-$TAG
