@@ -38,12 +38,13 @@ for e in "${!APACHE_@}"; do
 	fi
 done
 
+export PORT=${PORT:-80}
 export APACHE_RUN_USER=${APACHE_RUN_USER:-apache}
 export APACHE_RUN_GROUP=${APACHE_RUN_USER:-apache}
 export APACHE_DOCUMENT_ROOT=${APACHE_DOCUMENT_ROOT:-'/var/www/html/'}
 export DIRECTORY_OPTIONS=${DIRECTORY_OPTIONS:-'Indexes FollowSymLinks'}
 export ALLOW_OVERRIDE=${ALLOW_OVERRIDE:-'All'}
 
-envsubst '${APACHE_RUN_USER},${APACHE_RUN_GROUP},${APACHE_DOCUMENT_ROOT},${DIRECTORY_OPTIONS},${ALLOW_OVERRIDE}' < /usr/local/etc/httpd.conf.tpl > /etc/apache2/httpd.conf
+envsubst '${PORT},${APACHE_RUN_USER},${APACHE_RUN_GROUP},${APACHE_DOCUMENT_ROOT},${DIRECTORY_OPTIONS},${ALLOW_OVERRIDE}' < /usr/local/etc/httpd.conf.tpl > /etc/apache2/httpd.conf
 
 exec httpd -DFOREGROUND "$@"
