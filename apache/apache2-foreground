@@ -40,7 +40,7 @@ done
 
 export APACHE_RUN_USER=${APACHE_RUN_USER:-apache}
 export APACHE_RUN_GROUP=${APACHE_RUN_USER:-apache}
-export APACHE_DOCUMENT_ROOT=${APACHE_DOCUMENT_ROOT:'-/var/www/html/'}
+export APACHE_DOCUMENT_ROOT=${APACHE_DOCUMENT_ROOT:-'/var/www/html/'}
 export DIRECTORY_OPTIONS=${DIRECTORY_OPTIONS:-'Indexes FollowSymLinks'}
 export ALLOW_OVERRIDE=${ALLOW_OVERRIDE:-'All'}
 
