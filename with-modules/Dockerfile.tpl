@@ -13,6 +13,7 @@ RUN apk add -U --no-cache \
   openldap-dev \
   libjpeg-turbo-dev \
   && pecl install apc \
+  && echo extension=apc.so > /usr/local/etc/php/conf.d/apc.ini \
   && pecl install memcached-2.2.0 \
   && echo extension=memcached.so > /usr/local/etc/php/conf.d/memcached.ini \
   && pecl install memcache-2.2.7 \
