@@ -2,8 +2,7 @@
 
 set -e 
 
-[ -z "$PHP_CLI_DOCKER_IMAGE" ] && ( echo You must set PHP_CLI_DOCKER_IMAGE environment variable ; exit 1)
-
+PHP_CLI_DOCKER_IMAGE=${PHP_CLI_DOCKER_IMAGE:-'cespi/php-5.3:modules-apache-latest'}
 PHP_OPTIONS=${PHP_OPTIONS:- -d 'date.timezone=America/Argentina/Buenos_Aires' -d memory_limit=512M}
 PHP_CLI_DOCKER_RUN_OPTIONS=${PHP_CLI_DOCKER_RUN_OPTIONS:-'--add-host local.docker:172.17.0.1'}
 
