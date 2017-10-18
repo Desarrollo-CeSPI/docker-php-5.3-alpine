@@ -49,6 +49,15 @@ mkdir -p $HOME/bin && \
 
 _Make sure `$HOME/bin` is the first entry on your `$PATH`_
 
+If `php-server` gives the following error:
+
+```bash
+Variable PHP_SERVER_LOCAL_PHP_INI must be set with a valid php ini file. It now
+points to /home/car/bin/etc/docker/php/php.ini, but file seems to not exist
+```
+
+You must set PHP_SERVER_LOCAL_PHP_INI with a valid php ini file 
+
 ### Sample personalization per project using direnv
 
 ```bash
