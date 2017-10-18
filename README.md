@@ -35,7 +35,21 @@ You can then add this variables to your environment editing your `.bash_profile`
 or `.bashrc`, or instead use [direnv](https://github.com/direnv/direnv), so you can
 personalize a docker environment per project. 
 
-### Example
+### Install scripts
+
+Run the following command:
+
+```bash
+mkdir -p $HOME/bin && \
+  curl https://raw.githubusercontent.com/Desarrollo-CeSPI/docker-php-5.3-alpine/master/vendor/bin/php -s \
+  > $HOME/bin/php && chmod +x $HOME/bin/php && \
+  curl https://raw.githubusercontent.com/Desarrollo-CeSPI/docker-php-5.3-alpine/master/vendor/bin/php-server -s \
+  > $HOME/bin/php-server && chmod +x $HOME/bin/php-server
+```
+
+_Make sure `$HOME/bin` is the first entry on your `$PATH`_
+
+### Sample personalization per project using direnv
 
 ```bash
 PHP_CLI_DOCKER_IMAGE=cespi/php-5.3:modules-cli-latest
