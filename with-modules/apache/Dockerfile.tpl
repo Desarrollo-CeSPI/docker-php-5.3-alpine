@@ -12,6 +12,7 @@ RUN apk add -U --no-cache \
   libxslt-dev \
   openldap-dev \
   libjpeg-turbo-dev \
+  libmcrypt-dev \
   && pecl install apc \
   && echo extension=apc.so > /usr/local/etc/php/conf.d/apc.ini \
   && pecl install memcached-2.2.0 \
@@ -25,6 +26,7 @@ RUN apk add -U --no-cache \
   && docker-php-ext-install bcmath \
   && docker-php-ext-install soap \
   && docker-php-ext-install xsl \
+  && docker-php-ext-install mcrypt \
   && docker-php-ext-install gd mbstring pdo pdo_mysql zip \
   && apk del --purge autoconf alpine-sdk mariadb-dev openldap-dev \
   && apk add -U mariadb-client-libs libldap \
