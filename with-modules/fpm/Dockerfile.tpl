@@ -21,6 +21,7 @@ RUN apk add -U --no-cache \
   && pecl install memcache-2.2.7 \
   && echo extension=memcache.so > /usr/local/etc/php/conf.d/memcache.ini \
   && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr/include --with-freetype-dir=/usr/include \
+  && docker-php-ext-install gd \
   && docker-php-ext-configure ldap --with-libdir=lib/ \
   && docker-php-ext-install mysql \
   && docker-php-ext-install ldap \
@@ -28,7 +29,7 @@ RUN apk add -U --no-cache \
   && docker-php-ext-install soap \
   && docker-php-ext-install xsl \
   && docker-php-ext-install mcrypt \
-  && docker-php-ext-install gd mbstring pdo pdo_mysql zip \
+  && docker-php-ext-install mbstring pdo pdo_mysql zip \
   && apk del --purge autoconf alpine-sdk mariadb-dev openldap-dev \
   && apk add -U mariadb-client-libs libldap \
   && cd /usr/local/bin \
