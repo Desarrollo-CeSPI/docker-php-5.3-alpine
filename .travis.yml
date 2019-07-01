@@ -3,6 +3,9 @@ sudo: required
 services:
   - docker
 
+only:
+  - /^\d+\.\d+$/
+
 env:
   global:
   - secure: fILf4GslAy3BESZrXbYvdEdJYtM3Vhj4NFL9G60E4eUMw8lBzg6VkU1fohL4LIVeY6u2g5yKfInIjDdUY6BnX8k/Q44xrTDME7IkSJgwFcqaIBPPDtsCIUqRVh17HpNO1hLLpGTWpxyUDeeLAmW7jO4tYCmJsujuxL90/qDTHVRBPb8rp+bMhy9zHAf+2gzJ6TYCzpq/JFFCY0B0SksQFaMQIdPZmejUqCsYQe7m1QB8YTcA/Kupz4XQXGqm9FSjWtT9NnGuUTh6gkg53v4iaizl+2IjznQtdLXVCON1RbXaWXHACgdQLWaxfSJp7X/+RHR+ILhhI3SlOpCfa1C2CcVav4UlWpAda7QhXzfe9CfggV1NmsvhdGjynDq0LAl3C5nZOOkIRCEJ3fHaQj9z5ChNL2cKWYhqKD2kdMHEUe5K0BtdpognQcKVwmwFM6cwxsqXmWOUZ75daNL/dvBtZui8b8ErdRUb/ktjm2wV7w5/5Lp9D0mCmcqNHeXLTRIjtAK1N3EgocOodo7S2KNA5Lz3BRFa+7CzS5cz8SRXQXkLQKzudHdk3rnIF+gdz+NetegO3yyokO28qMASqBtjSI1//abjDqo5jeSCjnFJsENX6HvKmDSYhf7CZ98auRWJWGW9qehHPlTTd3884L52uQBdZEaZ5AaXse/TB6WV9OE=
@@ -19,7 +22,9 @@ script:
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - export REPO=cespi/php-5.3
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Creation of latest not allowed. Please create a tag"; exit 1; fi`
+  - if [ -z "$TRAVIS_TAG" ]; then echo "Tag must be set!"; exit 1; fi
+  - export TAG="alpine-$TRAVIS_TAG"
   - docker build -f Dockerfile -t $REPO:cli-$TAG .
   - docker build -f apache/Dockerfile -t $REPO:apache-$TAG ./apache
   - docker build -f fpm/Dockerfile -t $REPO:fpm-$TAG ./fpm
